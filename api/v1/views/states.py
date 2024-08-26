@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""A view for State objects that handles all default RESTFul API actions
+"""
 from models import storage
 from models.state import State
 from models.base_model import BaseModel
