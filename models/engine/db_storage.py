@@ -111,6 +111,5 @@ class DBStorage:
         Args:
             cls (class, optional): The class object. Defaults to None.
         """
-        self.reload()
         all_cls_objs = self.all(cls)
         return len(all_cls_objs)

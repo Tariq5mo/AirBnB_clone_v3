@@ -29,5 +29,5 @@ if __name__ == "__main__":
         HBNB_API_HOST = '0.0.0.0'
     HBNB_API_PORT = getenv("HBNB_API_PORT")
     if not HBNB_API_PORT:
-        HBNB_API_PORT = 5050
+        HBNB_API_PORT = 5000
     app.run(host=HBNB_API_HOST, port=HBNB_API_PORT, threaded=True, debug=True)
