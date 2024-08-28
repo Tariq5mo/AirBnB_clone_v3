@@ -83,7 +83,6 @@ class FileStorage:
                 except Exception:
                     pass
 
-        self.reload()
         all_cls_objs = self.all(cls)
         if all_cls_objs == {}:
             return None
