@@ -100,8 +100,8 @@ class FileStorage:
             return len(all_cls_objs)
         for clas_name, value in classes.items():
             if cls == clas_name or cls == value:
-                all_cls_objs = self.all()
+                all_cls_objs = self.all(cls)
                 return len(all_cls_objs)
 
         if cls not in classes.values():
-            return
+            return 0
