@@ -119,4 +119,4 @@ class DBStorage:
                 return len(all_cls_objs)
 
         if cls not in classes.values():
-            return
+            return 0

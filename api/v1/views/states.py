@@ -8,18 +8,18 @@ from api.v1.views import app_views
 from flask import jsonify, make_response, abort, request
 
 
-@app_views.route("/states/")
+@app_views.route("/states/", strict_slashes=False)
 def all_states():
     """ Retrieves the list of all State objects """
     li = []
-    all_objs = storage.all()
+    all_objs = storage.all(State)
     for key in all_objs:
         if all_objs[key].__class__.__name__ == "State":
             li.append(all_objs[key].to_dict())
     return jsonify(li)
 
 
-@app_views.route("/states/<state_id>")
+@app_views.route("/states/<state_id>", strict_slashes=False)
 def get_state(state_id):
     """ Retrieves a 'State' object """
     all_objs = storage.all(State)
@@ -29,7 +29,7 @@ def get_state(state_id):
     abort(404)
 
 
-@app_views.route('/states/<state_id>', methods=['DELETE'])
+@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
 def delete_task(state_id):
     ''' Deletes a 'State' object '''
     all_objs = storage.all(State)
@@ -41,7 +41,7 @@ def delete_task(state_id):
     abort(404)
 
 
-@app_views.route('/states/', methods=['POST'])
+@app_views.route('/states/', methods=['POST'], strict_slashes=False)
 def add_state():
     ''' Creates a "State" object '''
     obj_di = request.get_json(silent=True)
@@ -55,7 +55,7 @@ def add_state():
     return st_obj.to_dict(), 201
 
 
-@app_views.route('/states/<state_id>', methods=['PUT'])
+@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
     """ Updates a State object """
     attrs = request.get_json(silent=True)
