@@ -8,14 +8,13 @@ from api.v1.views import app_views
 from flask import jsonify, make_response, abort, request
 
 
-@app_views.route("/states/", strict_slashes=False)
+@app_views.route("/states", strict_slashes=False)
 def all_states():
     """ Retrieves the list of all State objects """
     li = []
-    all_objs = storage.all(State)
-    for key in all_objs:
-        if all_objs[key].__class__.__name__ == "State":
-            li.append(all_objs[key].to_dict())
+    all_state = storage.all(State)
+    for key in all_state:
+            li.append(all_state[key].to_dict())
     return jsonify(li)
 
 
@@ -29,7 +28,8 @@ def get_state(state_id):
     abort(404)
 
 
-@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['DELETE'],
+                 strict_slashes=False)
 def delete_task(state_id):
     ''' Deletes a 'State' object '''
     all_objs = storage.all(State)
@@ -41,10 +41,10 @@ def delete_task(state_id):
     abort(404)
 
 
-@app_views.route('/states/', methods=['POST'], strict_slashes=False)
+@app_views.route('/states', methods=['POST'], strict_slashes=False)
 def add_state():
     ''' Creates a "State" object '''
-    obj_di = request.get_json(silent=True)
+    obj_di = request.get_json()
     if not obj_di:
         return make_response("Not a JSON", 400)
     elif 'name' not in obj_di:
