@@ -77,26 +77,17 @@ class FileStorage:
         """
         if cls is None or id is None or not isinstance(id, str):
             return None
-        if isinstance(cls, str):  # To convert cls to class object if string.
-                try:
-                    cls = globals()[cls]
-                except Exception:
-                    pass
 
-        all_cls_objs = self.all(cls)
-        if all_cls_objs == {}:
-            return None
-
-        for obj in all_cls_objs:
-            class_name = obj.split(".")[0]
-            try:
-                class_name = globals()[class_name]
-            except Exception:
-                pass
-            if cls == class_name and id == obj.split(".")[1]:
-                return all_cls_objs[obj]
+        if cls in classes.keys() or cls in classes.values():
+            all_cls_objs = self.all(cls)
+            if all_cls_objs == {}:
+                return None
+            for obj in all_cls_objs:
+                if id == obj.split(".")[1]:
+                    return all_cls_objs[obj]
 
         return None
+
 
     def count(self, cls=None):
         """A method to count the number of objects in storage.
