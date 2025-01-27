@@ -20,6 +20,7 @@ def teardown_database(exception=None):
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
+
 app.register_blueprint(app_views)
 
 
